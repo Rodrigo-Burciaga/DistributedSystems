@@ -1,6 +1,6 @@
 # Part 1 of Pactice 3
 
-## Mutual exclusion in distibuted systems
+## Mutual exclusion in distibuted systems "TOKEN RING ALGORITHM"
 
 this practice is the algoritm "Token Ring" implemented in java
 
