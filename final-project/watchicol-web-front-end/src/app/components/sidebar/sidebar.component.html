@@ -1,0 +1,79 @@
+<nav id="sidebar"
+     [ngClass]="(showButtonService.currentState | async )? 'active' : ''"
+     style="overflow-y: auto;">
+  <div class="sidebar-header text-center" style="padding-bottom: 0!important;">
+    <img src="/assets/img/logo.png" class="img-fluid" alt="Responsive image"
+         style="width: 60%">
+  </div>
+  <ul class="list-unstyled components">
+    <hr style="width: 100%; background-color: #65626d;">
+    <li routerLinkActive="active"
+        style="padding: .7em;"
+        #rla="routerLinkActive"
+        [ngClass]="rla.isActive ? '' : 'inactive'">
+      <a [routerLink]="['nueva-denuncia']" aria-expanded="false">
+        <div class="row">
+          <div class="col text-center">
+            <span><fa-icon icon="plus-circle" size="2x"></fa-icon></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            Nueva Denuncia
+          </div>
+        </div>
+      </a>
+    </li>
+
+
+    <li class="inactive">
+      <a aria-expanded="false">
+        <div class="row">
+          <div class="col text-center">
+            <span><fa-icon icon="search" size="2x"></fa-icon></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            Denuncias Resueltas
+          </div>
+        </div>
+      </a>
+    </li>
+
+
+    <li class="inactive">
+      <a>
+        <div class="row">
+          <div class="col text-center">
+            <span><fa-icon icon="address-card" size="2x"></fa-icon></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            Contacto
+          </div>
+        </div>
+      </a>
+    </li>
+
+
+    <li routerLinkActive="active"
+        style="padding: .7em;"
+        #rlb="routerLinkActive"
+        [ngClass]="rlb.isActive ? '' : 'inactive'">
+      <a [routerLink]="['ayuda']" aria-expanded="false">
+        <div class="row">
+          <div class="col text-center">
+            <span><fa-icon icon="question-circle" size="2x"></fa-icon></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            Ayuda
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,166 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 map">
+      <mgl-map
+        [style]="'mapbox://styles/mapbox/streets-v11'"
+        [zoom]="[4]"
+        [center]="geoJson.geometry.coordinates"
+        style="height: 100%; position: relative">
+        <mgl-marker
+          [lngLat]="geoJson.geometry.coordinates"
+          [draggable]="true"
+          (dragEnd)="onDragEnd($event)">
+        </mgl-marker>
+        <mgl-control
+          mglGeolocate
+          [positionOptions]="{enableHighAccuracy: true}"
+          [trackUserLocation]="true"
+          position="bottom-right"
+        ></mgl-control>
+
+
+        <mgl-geojson-source
+          id="oneline"
+        >
+          <mgl-feature
+            [geometry]="geometry"
+          >
+          </mgl-feature>
+        </mgl-geojson-source>
+        <mgl-layer
+          id="route"
+          type="line"
+          source="oneline"
+          [layout]="{
+        'line-join': 'round',
+        'line-cap': 'round'
+      }"
+          [paint]="{
+        'line-color': 'red',
+        'line-width': 4
+      }"
+        >
+        </mgl-layer>
+
+
+      </mgl-map>
+      <button type="button" id="buttonAdd"
+              class="btn btn-link boton"
+              data-toggle="modal"
+              data-target="#exampleModal">
+        <fa-icon icon="plus-circle" size="2x" class="icono"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="alerta"
+       class="alert alert-primary snackbar alert-dismissible fade show"
+       role="alert">
+    {{alerta}}
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header secondary-color">
+        <h3 class="modal-title" id="exampleModalLabel">Nueva Denuncia</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <span *ngIf="errorMessage" style="color: red">{{errorMessage}}</span>
+      <div class="modal-body">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+               aria-selected="true">
+              Comentarios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+               aria-selected="false">
+              Tus Datos
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8">
+                  Antes de enviar tu denuncia, por favor detalla los acontecimientos que presenciaste.
+                  <div class="form-group">
+                    <textarea class="form-control"
+                              [(ngModel)]="areaTexto"
+                              id="exampleFormControlTextarea1" rows="4"></textarea>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  Tipo de Denuncia
+                  <div class="custom-control custom-radio" style="color: #7b1fa2">
+                    <input type="radio" id="customRadio1"
+                           name="tipo"
+                           class="custom-control-input"
+                           value="fuga"
+                           [(ngModel)]="tipo">
+                    <label class="custom-control-label" for="customRadio1">Fuga</label>
+                  </div>
+                  <div class="custom-control custom-radio" style="color: #7b1fa2">
+                    <input type="radio" id="customRadio2"
+                           value="robo"
+                           name="tipo"
+                           [(ngModel)]="tipo"
+                           class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Robo</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+              <div class="col-12 text-center">
+                <h3>Confirma tus datos</h3>
+              </div>
+              <div class="col-12 text-center">
+                <div class="row">
+                  <div class="col-lg-3">
+                    Comentario:
+                  </div>
+                  <div class="col-lg-9">
+                    {{areaTexto}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    Tipo de denuncia:
+                  </div>
+                  <div class="col-lg-9">
+                    {{tipo}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link" data-dismiss="modal"
+                style="color: #7b1fa2">
+          CANCELAR
+        </button>
+        <button type="button" class="btn btn-primary"
+                [disabled]="tipo == '' || areaTexto == ''"
+                (click)="sendGeoJSON()"
+                style="background-color: #7b1fa2">
+          CONFIRMAR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

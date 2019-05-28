@@ -1,0 +1,42 @@
+.main-container{
+  min-height: 100vh;
+  overflow: auto;
+  background-color: #373440;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+.footer{
+  background-color: #15121b;
+  position: fixed;
+
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+  z-index: 999;
+}
+.content{
+  background-color: #65626d;
+  padding: 0;
+  width: calc(100% - 250px);
+  padding: 0px;
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  #content.active {
+    width: calc(100% - 250px);
+  }
+  #content {
+    width: 100%;
+  }
+}
+
