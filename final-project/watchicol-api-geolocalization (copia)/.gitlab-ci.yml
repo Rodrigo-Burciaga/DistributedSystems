@@ -1,0 +1,127 @@
+stages:
+  - integration-code
+  - pre-release
+  - release
+  - release-to-production
+linter:
+  image: node:8.12.0
+  stage: integration-code
+  script:
+    - npm install
+    - ./node_modules/.bin/nps lint
+  except:
+    - "${CI_COMMIT_REF_NAME}@supplynet/single-sign-on-api"
+compileProject:
+  image: node:8.12.0
+  stage: integration-code
+  script:
+    - npm install
+    - ./node_modules/.bin/nps compile
+  except:
+    - "${CI_COMMIT_REF_NAME}@supplynet/single-sign-on-api"
+unitTest:
+  image: node:8.12.0
+  stage: integration-code
+  script:
+    - npm install
+    - ./node_modules/.bin/nps test.unit
+  except:
+    - "${CI_COMMIT_REF_NAME}@supplynet/single-sign-on-api"
+integrationTest:
+  image: node:8.12.0
+  stage: integration-code
+  script:
+    - npm install
+    - ./node_modules/.bin/nps test.integration
+  except:
+    - "${CI_COMMIT_REF_NAME}@supplynet/single-sign-on-api"
+buildDev:
+  image: node:8.12.0
+  stage: pre-release
+  script:
+    - npm install
+    - ./node_modules/.bin/nps build
+  only:
+    - develop@supplynet/single-sign-on-api
+deployToTestEnvironment:
+  image: node:8.12.0
+  stage: pre-release
+  script:
+    - echo "Comming soon"
+  only:
+    - develop@supplynet/single-sign-on-api
+buildProd:
+  image: node:8.12.0
+  stage: release
+  script:
+    - npm install
+    - ./node_modules/.bin/nps build.prod
+  only:
+    - releases@supplynet/single-sign-on-api
+systemTest:
+  image: node:8.12.0
+  stage: release
+  script:
+    - echo "Comming soon"
+  only:
+    - releases@supplynet/single-sign-on-api
+e2eTest:
+  image: node:8.12.0
+  stage: release
+  script:
+    - echo "Comming soon"
+  only:
+    - releases@supplynet/single-sign-on-api
+loadTest:
+  image: node:8.12.0
+  stage: release
+  script:
+    - echo "Comming soon"
+  only:
+    - releases@supplynet/single-sign-on-api
+sonarQubeAnalysis:
+  image: netlogistikrobot/sonar-scanner
+  stage: release
+  script:
+    - npm install
+    - echo "sonar.host.url=https://sonar.netlogistik.com" >> /opt/sonar-scanner/conf/sonar-scanner.properties
+    - sonar-scanner
+  only:
+    - develop@supplynet/single-sign-on-api
+    - releases@supplynet/single-sign-on-api
+dockerBuild:
+  image: docker:latest
+  stage: release
+  only:
+    - releases@supplynet/single-sign-on-api
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: "overlay"
+  before_script:
+    - docker version
+    - "docker info"
+    - "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
+  script:
+    - "docker build -t ${CI_REGISTRY}/${CI_PROJECT_PATH}:latest --pull ."
+    - "docker push ${CI_REGISTRY}/${CI_PROJECT_PATH}:latest"
+  after_script:
+    - "docker logout ${CI_REGISTRY}"
+dockerBuildByTag:
+  image: docker:latest
+  stage: release
+  only:
+    - "tags"
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: "overlay"
+  before_script:
+    - docker version
+    - "docker info"
+    - "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
+  script:
+    - "docker build -t ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG} --pull ."
+    - "docker push ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG}"
+  after_script:
+    - "docker logout ${CI_REGISTRY}"

@@ -1,0 +1,126 @@
+{
+  "info": {
+    "name": "AUTH_SERVER",
+    "_postman_id": "ca7b9a9b-c5a3-536d-fc13-4642621334e1",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "verify client",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "http://localhost:3000/apiAuthServer/verifyClient/ap123",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "apiAuthServer",
+            "verifyClient",
+            "ap123"
+          ]
+        },
+        "description": "Verify if the client exists, commmunicating with kong"
+      },
+      "response": []
+    },
+    {
+      "name": "authServer Post Credentials",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "user",
+              "value": "Rodri",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "pass",
+              "value": "123",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/apiAuthServer/auth_user",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "apiAuthServer",
+            "auth_user"
+          ]
+        },
+        "description": "endpoint POST credentials to auth a Resource owner"
+      },
+      "response": []
+    },
+    {
+      "name": "Auth_Server Implicit Grant",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "authenticated_userid",
+              "value": "123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "ap123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "scope",
+              "value": "email",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "state",
+              "value": "auso2334",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/apiAuthServer/grantedAccessImplicitGrant",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "apiAuthServer",
+            "grantedAccessImplicitGrant"
+          ]
+        },
+        "description": ""
+      },
+      "response": []
+    }
+  ]
+}

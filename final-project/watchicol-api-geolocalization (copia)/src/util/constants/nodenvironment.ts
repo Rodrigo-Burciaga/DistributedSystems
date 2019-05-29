@@ -1,0 +1,1 @@
+export const errorNodeProcess: number = 1;

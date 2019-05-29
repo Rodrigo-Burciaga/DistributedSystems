@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "reflect-metadata",
+      "node"
+    ],
+    "lib": [
+      "es6"
+    ],
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "outDir": "dist",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "paths": {
+    "*": [
+      "node_modules/*"
+    ]
+  },
+  "files": [
+    "./node_modules/@types/jest/index.d.ts"
+  ],
+  "include": [
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

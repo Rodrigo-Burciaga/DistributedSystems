@@ -1,0 +1,376 @@
+{
+  "info": {
+    "name": "KONG API",
+    "_postman_id": "075798ca-4114-be2a-00c5-307e8a6ba4bc",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Request_token Authorization Code",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "grant_type",
+              "value": "authorization_code",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "code",
+              "value": "1AamKVNcAnkauxTKjAPJlP2tJR02UDI8",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "https://www.netlogistik.com/es/",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "ap123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "ap123",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://127.0.0.1:8443/oauth_api/oauth2/token",
+          "protocol": "https",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8443",
+          "path": [
+            "oauth_api",
+            "oauth2",
+            "token"
+          ]
+        },
+        "description": "Requesting token after request code\n\n\nFlow :Authorization Code Grant"
+      },
+      "response": []
+    },
+    {
+      "name": "Refresh token Authorization Code",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "grant_type",
+              "value": "refresh_token",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "ap123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "ap123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "refresh_token",
+              "value": "lWXyplp9WJMcROO9S3DHhtB2yiZk5R8p",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://127.0.0.1:8443/oauth_api/oauth2/token",
+          "protocol": "https",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8443",
+          "path": [
+            "oauth_api",
+            "oauth2",
+            "token"
+          ]
+        },
+        "description": "getting refresh token to the oauth"
+      },
+      "response": []
+    },
+    {
+      "name": "Authorization_code",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "client_id",
+              "value": "ap123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "provision_key",
+              "value": "1sjdi390skaldo129s0ddjfl",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "authenticated_userid",
+              "value": "userid123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "scope",
+              "value": "email",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "state",
+              "value": "12adr",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "response_type",
+              "value": "code",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://127.0.0.1:8443/oauth_api/oauth2/authorize",
+          "protocol": "https",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8443",
+          "path": [
+            "oauth_api",
+            "oauth2",
+            "authorize"
+          ]
+        },
+        "description": "Authorization code oauth2 implemented in kong api"
+      },
+      "response": []
+    },
+    {
+      "name": "Verify Client exits",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "http://127.0.0.1:8001/oauth2?client_id=ap123",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8001",
+          "path": [
+            "oauth2"
+          ],
+          "query": [
+            {
+              "key": "client_id",
+              "value": "ap123",
+              "equals": true
+            }
+          ]
+        },
+        "description": "Request to verify if client exists"
+      },
+      "response": []
+    },
+    {
+      "name": "Implicit Grant",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Host",
+            "value": "example.com"
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "client_id",
+              "value": "ap123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "scope",
+              "value": "email",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "authenticated_userid",
+              "value": "userid123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "response_type",
+              "value": "token",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "provision_key",
+              "value": "1sjdi390skaldo129s0ddjfl",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "state",
+              "value": "abdcdsr",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://127.0.0.1:8443/oauth_api/oauth2/authorize",
+          "protocol": "https",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8443",
+          "path": [
+            "oauth_api",
+            "oauth2",
+            "authorize"
+          ]
+        },
+        "description": "Implicit Grant Flow"
+      },
+      "response": []
+    },
+    {
+      "name": "Password",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "provision_key",
+              "value": "12jskodol3912",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "authenticated_userid",
+              "value": "userid123",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "grant_type",
+              "value": "password",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "client1",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "client1",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "scope°",
+              "value": "email",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://127.0.0.1:8443/oauth_api/oauth2/token",
+          "protocol": "https",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8443",
+          "path": [
+            "oauth_api",
+            "oauth2",
+            "token"
+          ]
+        },
+        "description": ""
+      },
+      "response": []
+    }
+  ]
+}
