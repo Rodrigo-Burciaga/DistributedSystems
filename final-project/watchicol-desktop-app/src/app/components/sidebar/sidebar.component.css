@@ -1,0 +1,84 @@
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 9;
+  color: #fff;
+  transition: all 0.3s;
+  width: 250px;
+  background-color: #2a3f54!important;
+
+}
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -350px;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+}
+
+
+
+a, a:hover, a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+#sidebar {
+  /* don't forget to add all the previously mentioned styles here too */
+  background: #2a3f54;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+  padding-top: 15px;
+  background: #2a3f54;
+}
+
+
+#sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+#sidebar ul li a:hover {
+  color: #00192b;
+  background: #5ddef4;
+}
+
+.active{
+  background-color: #00192b;
+  color: #5ddef4;
+}
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #6d7fcc;
+}
+.inactive{
+  opacity: .2;
+}
+.inactive:hover{
+  opacity: unset;
+}

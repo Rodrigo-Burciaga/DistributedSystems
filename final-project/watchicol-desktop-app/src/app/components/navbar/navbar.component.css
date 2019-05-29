@@ -1,0 +1,45 @@
+@media (min-width: 768px) {
+  #sidebarCollapse {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 768px) {
+  #content.active {
+    width: calc(100% - 250px);
+  }
+
+  #content {
+    width: 100%;
+  }
+
+  #sidebarCollapse {
+    visibility: visible;
+  }
+
+}
+
+.barra {
+  background-color: #ededed !important;
+  height: 4em;
+}
+
+.container-title {
+  width: 100%;
+  color: black;
+}
+
+.icono {
+  color: black;
+}
+
+@media (max-width: 550px) {
+  h1 {
+    font-size: 2em;
+  }
+}
+@media (max-width: 550px) {
+  h1 {
+    font-size: 1.5em;
+  }
+}

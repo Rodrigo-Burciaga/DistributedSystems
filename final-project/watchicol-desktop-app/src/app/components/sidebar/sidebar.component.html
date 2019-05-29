@@ -1,0 +1,122 @@
+<nav id="sidebar"
+     [ngClass]="(showButtonService.currentState | async )? 'active' : ''"
+     style="overflow-y: auto;">
+  <div class="sidebar-header text-center">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4 text-center">
+          <img src="assets/img/logo.png" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col-lg-8">
+          <h4>Watchicolito Admin</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 text-center">
+          <fa-icon icon="user-circle" size="3x"></fa-icon>
+        </div>
+        <div class="col-lg-8">
+          Bienvenido, <h5>Admin</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr style="width: 100%; background-color: #556a81;">
+  <ul class="list-unstyled">
+    <li routerLinkActive="active"
+        #rla="routerLinkActive"
+        [ngClass]="rla.isActive ? '' : 'inactive'"
+        style="padding: 5px!important;">
+      <a [routerLink]="['nueva-denuncia']" aria-expanded="false">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3 text-right" style="padding: 0!important;margin: 0!important;">
+              <span><fa-icon icon="home" size="2x"></fa-icon></span>
+            </div>
+            <div class="col-lg-9 text-left">
+              Inicio
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+
+    <li class="inactive">
+
+      <div class="container-fluid">
+        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          <div class="row">
+            <div class="col-lg-3 text-right" style="padding: 0!important;margin: 0!important;">
+              <span><fa-icon icon="edit" size="2x"></fa-icon></span>
+            </div>
+            <div class="col-lg-9 text-left">
+              Incidencias
+
+            </div>
+
+          </div>
+        </a>
+      </div>
+    </li>
+    <li>
+      <ul class="collapse list-unstyled" id="pageSubmenu">
+        <li>
+          <a href="#">Todas</a>
+        </li>
+        <li>
+          <a href="#">Por Controlar</a>
+        </li>
+        <li>
+          <a href="#">Controladas</a>
+        </li>
+        <li>
+          <a href="#">Por Reparar</a>
+        </li>
+        <li>
+          <a href="#">Reparadas</a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="inactive">
+      <a>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3 text-right" style="padding: 0!important;margin: 0!important;">
+              <span><fa-icon icon="hard-hat" size="2x"></fa-icon></span>
+            </div>
+            <div class="col-lg-9 text-left">
+              Técnicos
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+
+
+
+
+    <li routerLinkActive="active"
+        #rlm="routerLinkActive"
+        [ngClass]="rlm.isActive ? '' : 'inactive'"
+        style="padding: 5px!important;">
+      <a [routerLink]="['militares']" aria-expanded="false">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3 text-right" style="padding: 0!important;margin: 0!important;">
+              <span><fa-icon icon="users" size="2x"></fa-icon></span>
+            </div>
+            <div class="col-lg-9 text-left">
+              Militares
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+
+  </ul>
+
+</nav>
