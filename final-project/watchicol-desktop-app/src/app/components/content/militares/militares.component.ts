@@ -12,9 +12,4 @@ export class MilitaresComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  log() {
-    console.log('sjsj');
-  }
-
 }

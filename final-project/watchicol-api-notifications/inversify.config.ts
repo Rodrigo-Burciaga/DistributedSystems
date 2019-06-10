@@ -22,12 +22,12 @@ import { TypeORMLoader } from "./src/loaders/typeORMLoader";
 import { BusinessRules } from "./src/services/BR";
 import { TokenBusinessRules } from "./src/services/businessRules/tokenBusinessRules";
 import { DatabaseCommonPool } from "./src/services/dbcp/databaseCommonPool";
-import { GeoLocalizationController } from "./src/api/controllers/GeoLocalizationController";
+import { NotificationController } from "./src/api/controllers/NotificationController";
 import { GeoJSONService } from "./src/api/services/GeoJSONService";
 
 const containerInversify = new Container();
 
-containerInversify.bind<GeoLocalizationController>(GeoLocalizationController).toSelf();
+containerInversify.bind<NotificationController>(NotificationController).toSelf();
 
 // INTERCEPTORS
 containerInversify.bind<VerifyClientInterceptor>(VerifyClientInterceptor).toSelf();

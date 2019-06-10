@@ -22,12 +22,30 @@ class Server {
     constructor() {
         useContainer(containerInversify);
         this._logger = containerInversify.resolve<Logger>(Logger);
+        let allowedOrigins = ["http://localhost:4200",
+            "http://localhost:4201"];
         this.app = createExpressServer({
             routePrefix: env.app.routePrefix,
             defaultErrorHandler: false,
             classTransformer: true,
             cors: {
-                origin: process.env.CORS_ALLOWED_ORIGIN,
+                origin: function (origin, callback) {
+
+                    // allow requests with no origin
+                    // (like mobile apps or curl requests)
+                    if (!origin) {
+                        return callback(null, true);
+                    }
+
+                    if (allowedOrigins.indexOf(origin) === -1) {
+                        let msg = "The CORS policy for this site does not " +
+                            "allow access from the specified Origin.";
+
+                        return callback(new Error(msg), false);
+                    }
+
+                    return callback(null, true);
+                },
                 optionsSuccessStatus: 200
             },
             controllers: env.app.dirs.controllers,

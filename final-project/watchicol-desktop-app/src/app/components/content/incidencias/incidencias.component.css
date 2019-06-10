@@ -1,0 +1,28 @@
+.map {
+  height: calc(100vh - 3em - 5em);
+  width: 100%;
+  padding-bottom: 0;
+  overflow: auto;
+  margin-bottom: 30px!important;
+}
+@media (max-width: 950px) {
+  #buttonAdd{
+    bottom: 5.4em !important;
+  }
+}
+.boton{
+  position: absolute;
+  bottom: 4em;
+  right: 10px;
+  z-index: 99;
+}
+.icono{
+  color: #7b1fa2;
+}
+.hoverMap{
+  cursor: pointer;
+}
+.activo {
+  color:red!important;
+  background-color: black!important;
+}

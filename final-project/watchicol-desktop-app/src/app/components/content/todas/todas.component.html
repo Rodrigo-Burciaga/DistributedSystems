@@ -7,34 +7,27 @@
         [center]="geoJson.geometry.coordinates"
         style="height: 100%; position: relative">
         <mgl-marker
-          *ngFor="let feature of geojson.features"
-          [feature]="feature"
-        >
-          <div
-            (click)="alert(feature.properties.message)"
-            class="marker"
-            [ngStyle]="{
-          'background-image': 'url(https://placekitten.com/g/' + feature.properties.iconSize.join('/') + '/)',
-          width: feature.properties.iconSize[0]+'px',
-          height: feature.properties.iconSize[1]+'px'
-        }"
-          >
+          [lngLat]="geoJson.geometry.coordinates"
+          [draggable]="true"
+          (dragEnd)="onDragEnd($event)">
+        </mgl-marker>
+        <mgl-marker *ngFor="let point of points"
+                    [feature]="point">
+          <div class="marker"
+               [ngStyle]="{}">
+            <span class="hoverMap" data-toggle="tooltip"
+                  data-placement="top"
+                  [title]="point.tipo_denuncia">
+              <fa-icon icon="map-marker"
+                       style="color: deeppink!important;"
+                       size="2x"></fa-icon>
+            </span>
           </div>
         </mgl-marker>
-        <mgl-control
-          mglGeolocate
-          [positionOptions]="{enableHighAccuracy: true}"
-          [trackUserLocation]="true"
-          position="bottom-right"
-        ></mgl-control>
-
-
         <mgl-geojson-source
-          id="oneline"
-        >
+          id="oneline">
           <mgl-feature
-            [geometry]="geometry"
-          >
+            [geometry]="geometry">
           </mgl-feature>
         </mgl-geojson-source>
         <mgl-layer
@@ -46,13 +39,16 @@
         'line-cap': 'round'
       }"
           [paint]="{
-        'line-color': 'red',
+        'line-color': '#00192b',
         'line-width': 4
-      }"
-        >
+      }">
         </mgl-layer>
-
-
+        <mgl-control
+          mglGeolocate
+          [positionOptions]="{enableHighAccuracy: true}"
+          [trackUserLocation]="true"
+          position="bottom-right">
+        </mgl-control>
       </mgl-map>
       <button type="button" id="buttonAdd"
               class="btn btn-link boton"
@@ -112,7 +108,7 @@
                 </div>
                 <div class="col-lg-4">
                   Tipo de Denuncia
-                  <div class="custom-control custom-radio" style="color: #7b1fa2">
+                  <div class="custom-control custom-radio" style="color: #00192b">
                     <input type="radio" id="customRadio1"
                            name="tipo"
                            class="custom-control-input"
@@ -120,7 +116,7 @@
                            [(ngModel)]="tipo">
                     <label class="custom-control-label" for="customRadio1">Fuga</label>
                   </div>
-                  <div class="custom-control custom-radio" style="color: #7b1fa2">
+                  <div class="custom-control custom-radio" style="color: #00192b">
                     <input type="radio" id="customRadio2"
                            value="robo"
                            name="tipo"
@@ -161,13 +157,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-link" data-dismiss="modal"
-                style="color: #7b1fa2">
+                style="color: #00192b">
           CANCELAR
         </button>
         <button type="button" class="btn btn-primary"
                 [disabled]="tipo == '' || areaTexto == ''"
-                (click)="sendGeoJSON()"
-                style="background-color: #7b1fa2">
+                (click)="nuevaDenunciaAControlar()"
+                style="background-color: #00192b">
           CONFIRMAR
         </button>
       </div>

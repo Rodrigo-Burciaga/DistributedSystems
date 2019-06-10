@@ -3,6 +3,17 @@
     <button type="button" id="sidebarCollapse" class="btn btn-link float-left" (click)="changeState()">
       <fa-icon icon="bars" class="icono"></fa-icon>
     </button>
-    <h1>Watchicolito Denuncias</h1>
+    <div class="row">
+      <div class="col-lg-9">
+        <h1>Watchicolito Denuncias</h1>
+      </div>
+      <div class="col-lg-3">
+        <button type="button" class="btn btn-danger">
+          Notificaciones
+          <span class="badge badge-light">{{showButtonService.currentState1 | async }}</span>
+          <span class="sr-only">unread messages</span>
+        </button>
+      </div>
+    </div>
   </div>
 </nav>

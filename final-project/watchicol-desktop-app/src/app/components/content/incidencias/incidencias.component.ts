@@ -1,20 +1,20 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GeoJson } from '../../../util/classes/GeoJson';
-import { FeatureCollection } from '../../../util/classes/FeatureCollection';
-import { HttpService } from '../../../services/http/http.service';
-import { ResponseAPIInterface } from '../../../util/interfaces/ResponseAPIInterface';
-import { Marker } from 'mapbox-gl';
 import { geometry } from '../../../util/classes/DuctosGeometry';
+import { HttpService } from '../../../services/http/http.service';
 import { ContentService } from '../../../services/ui/content.service';
+import { FeatureCollection } from '../../../util/classes/FeatureCollection';
+import { ResponseAPIInterface } from '../../../util/interfaces/ResponseAPIInterface';
+import { IGeoJson } from '../../../util/interfaces/IGeoJSON';
 
 declare var $: any;
 
 @Component({
-  selector: 'app-nueva-denuncia',
-  templateUrl: './nueva-denuncia.component.html',
-  styleUrls: ['./nueva-denuncia.component.css']
+  selector: 'app-incidencias',
+  templateUrl: './incidencias.component.html',
+  styleUrls: ['./incidencias.component.css']
 })
-export class NuevaDenunciaComponent implements OnInit {
+export class IncidenciasComponent implements OnInit {
 
   public geoJson: GeoJson;
   public tipo = '';
@@ -22,59 +22,8 @@ export class NuevaDenunciaComponent implements OnInit {
   public errorMessage: string;
   public alerta = undefined;
   public geometry = geometry;
+  public points: Array<GeoJson>;
 
-
-  geojson = {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        properties: {
-          message: 'Foo',
-          iconSize: [60, 60]
-        },
-        geometry: {
-          type: 'Point',
-          coordinates: [
-            -66.324462890625,
-            -16.024695711685304
-          ]
-        }
-      },
-      {
-        type: 'Feature',
-        properties: {
-          message: 'Bar',
-          iconSize: [50, 50]
-        },
-        geometry: {
-          type: 'Point',
-          coordinates: [
-            -61.2158203125,
-            -15.97189158092897
-          ]
-        }
-      },
-      {
-        type: 'Feature',
-        properties: {
-          message: 'Baz',
-          iconSize: [40, 40]
-        },
-        geometry: {
-          type: 'Point',
-          coordinates: [
-            -63.29223632812499,
-            -18.28151823530889
-          ]
-        }
-      }
-    ]
-  };
-
-  alert(message: string) {
-    alert(message);
-  }
 
   constructor(private httpService: HttpService,
               private contentService: ContentService) {
@@ -86,6 +35,23 @@ export class NuevaDenunciaComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.points) {
+      this.httpService.getIncidenciasControladas().subscribe((data: ResponseAPIInterface<Array<IGeoJson>>) => {
+        if (data.status !== 'error') {
+          if (data.data.length > 0) {
+            this.points = [];
+            data.data.map((item: IGeoJson) => {
+              item.properties = [];
+              console.log(item);
+              this.points.push(item);
+            });
+          }
+        } else {
+          this.mostrarAlert('Estamos teniendo problemas para obtener la información');
+        }
+
+      });
+    }
   }
 
   public initializeMap(): void {
@@ -98,10 +64,6 @@ export class NuevaDenunciaComponent implements OnInit {
     }
   }
 
-  onDragEnd(marker: Marker) {
-    NgZone.assertInAngularZone();
-    this.geoJson.geometry.coordinates = marker.getLngLat().toArray();
-  }
 
   sendGeoJSON() {
     this.areaTexto = this.areaTexto.trim();
@@ -133,6 +95,4 @@ export class NuevaDenunciaComponent implements OnInit {
       console.log(data);
     });
   }
-
-
 }

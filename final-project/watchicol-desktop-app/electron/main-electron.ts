@@ -13,7 +13,13 @@ app.on('activate', () => {
 });
 
 function createWindow() {
-  win = new BrowserWindow({ width: 800, height: 600 });
+  win = new BrowserWindow({width: 800, height: 600});
+  const ses = win.webContents.session;
+
+  ses.clearCache(() => {
+    alert('Cache cleared!');
+  });
+  ses.clearStorageData();
   win.loadURL(
     url.format({
       pathname: path.join(__dirname, `/../../dist/watchicol-web-front-end/index.html`),
@@ -26,6 +32,7 @@ function createWindow() {
   win.on('closed', () => {
   });
 }
+
 
 
 

@@ -17,5 +17,18 @@
   z-index: 99;
 }
 .icono{
-  color: #7b1fa2;
+  color: #00192b;
+}
+.hoverMap{
+  cursor: pointer;
+}
+.activo {
+  color:red!important;
+  background-color: black!important;
+}
+.boton{
+  position: absolute;
+  bottom: 4em;
+  right: 10px;
+  z-index: 99;
 }

@@ -29,7 +29,7 @@ export class HttpService {
     console.log(stringUrl);
     return this.http.post(stringUrl, featureCollection, httpOptions)
       .pipe(
-        timeout(5000),
+        timeout(10000),
         catchError(this.handleError('postGeoJSON', {} as any))
       );
   }

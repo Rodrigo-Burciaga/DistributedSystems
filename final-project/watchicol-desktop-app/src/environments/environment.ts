@@ -8,9 +8,16 @@ export const environment = {
     accessToken: 'pk.eyJ1IjoicmJ1cmNpYWdhIiwiYSI6ImNqdzQzeWtreTFlZmYzenFrbGkwYWhnN3EifQ.nDE_UPSdca5lAu_P6kNuww'
   },
   config: {
-    urlServer: 'http://localhost:3000',
-    apiGeolocalication: '/apiGeoLocalization',
-    endpointGeoJSON: '/geoJSON'
+    urlProxy: 'http://localhost:80',
+    locationServiceAuth: '/auth',
+    locationApiGeolocalication: '/geoApi',
+    endpointGeoJSON: '/geoJSON',
+    endpointNAControlar: '/incidencias/addPorControlar',
+    endpointPorControlar: '/incidencias/por/Controlar',
+    endpointIControladas: '/incidencias/controladas',
+    endpointAuthUser: '/auth_user',
+    endpointImplicitGrant: '/implicitGrant',
+    endpointTodas: '/incidencias/todas'
   }
 };
 

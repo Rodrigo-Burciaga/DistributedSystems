@@ -1,3 +1,14 @@
+ul li ul li a.active{
+  background-color: #00192b!important;
+  color: #5ddef4!important;
+  opacity: unset!important;
+}
+ul li ul li a.active:hover{
+  color: #00192b!important;
+  background-color: #5ddef4!important;
+  opacity: unset!important;
+}
+
 #sidebar {
   position: fixed;
   top: 0;
@@ -72,9 +83,7 @@ a, a:hover, a:focus {
   color: #5ddef4;
 }
 ul ul a {
-  font-size: 0.9em !important;
-  padding-left: 30px !important;
-  background: #6d7fcc;
+  background-color: #2a3f54!important;
 }
 .inactive{
   opacity: .2;
@@ -82,3 +91,7 @@ ul ul a {
 .inactive:hover{
   opacity: unset;
 }
+.cursor:hover{
+  cursor: pointer;
+}
+

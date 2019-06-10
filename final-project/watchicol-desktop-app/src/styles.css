@@ -20,12 +20,12 @@ p {
 }
 
 .secondary-color{
-  background-color: #7b1fa2;
+  background-color: #2a3f54;
   color: white;
 }
 
 .snackbar{
-  background-color: #7b1fa2!important;
+  background-color: #00192b!important;
   color: white!important;
   transition: all 0.3s;
   position: absolute;

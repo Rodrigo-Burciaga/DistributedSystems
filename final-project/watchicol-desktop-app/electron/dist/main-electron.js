@@ -19,6 +19,11 @@ electron_1.app.on('activate', function () {
 });
 function createWindow() {
     win = new electron_1.BrowserWindow({ width: 800, height: 600 });
+    var ses = win.webContents.session;
+    ses.clearCache(function () {
+        alert('Cache cleared!');
+    });
+    ses.clearStorageData();
     win.loadURL(url.format({
         pathname: path.join(__dirname, "/../../dist/watchicol-web-front-end/index.html"),
         protocol: 'file:',

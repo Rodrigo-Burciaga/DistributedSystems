@@ -1,0 +1,8 @@
+<div class="main-container wrapper">
+  <app-sidebar></app-sidebar>
+  <div id="content" class="content"
+       [ngClass]="(showButtonService.currentState | async )? 'active' : ''">
+    <app-navbar></app-navbar>
+    <app-content></app-content>
+  </div>
+</div>

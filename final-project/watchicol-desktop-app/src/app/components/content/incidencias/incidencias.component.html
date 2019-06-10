@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 map">
+      <mgl-map
+        [style]="'mapbox://styles/mapbox/streets-v11'"
+        [zoom]="[4]"
+        [center]="geoJson.geometry.coordinates"
+        style="height: 100%; position: relative">
+        <mgl-marker
+          *ngFor="let point of points"
+          [feature]="point"
+        >
+          <div class="marker"
+               [ngStyle]="{}"
+          >
+            <span class="hoverMap" data-toggle="tooltip"
+                  data-placement="top"
+                  [title]="point.geometry.coordinates">
+              <fa-icon icon="map-marker"
+                       style="color: red!important;"
+                       size="2x"></fa-icon>
+            </span>
+          </div>
+        </mgl-marker>
+
+
+
+
+
+        <mgl-geojson-source
+          id="oneline"
+        >
+          <mgl-feature
+            [geometry]="geometry"
+          >
+          </mgl-feature>
+        </mgl-geojson-source>
+        <mgl-layer
+          id="route"
+          type="line"
+          source="oneline"
+          [layout]="{
+        'line-join': 'round',
+        'line-cap': 'round'
+      }"
+          [paint]="{
+        'line-color': '#00192b',
+        'line-width': 4
+      }"
+        >
+        </mgl-layer>
+        <mgl-control
+          mglGeolocate
+          [positionOptions]="{enableHighAccuracy: true}"
+          [trackUserLocation]="true"
+          position="bottom-right"
+        ></mgl-control>
+      </mgl-map>
+    </div>
+  </div>
+  <div *ngIf="alerta"
+       class="alert alert-primary snackbar alert-dismissible fade show"
+       role="alert">
+    {{alerta}}
+  </div>
+</div>
+
+

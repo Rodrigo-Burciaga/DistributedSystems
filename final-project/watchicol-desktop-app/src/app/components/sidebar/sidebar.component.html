@@ -27,7 +27,8 @@
         #rla="routerLinkActive"
         [ngClass]="rla.isActive ? '' : 'inactive'"
         style="padding: 5px!important;">
-      <a [routerLink]="['nueva-denuncia']" aria-expanded="false">
+      <a [routerLink]="['default']"
+         aria-expanded="false">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-3 text-right" style="padding: 0!important;margin: 0!important;">
@@ -42,8 +43,8 @@
     </li>
 
 
-    <li class="inactive">
-
+    <li [ngClass]="rlinciC.isActive || rla.isActive || rlinciR.isActive ||
+    rlinciT.isActive ||  rlinciPC.isActive ? 'activo' : 'inactive'">
       <div class="container-fluid">
         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
           <div class="row">
@@ -62,19 +63,33 @@
     <li>
       <ul class="collapse list-unstyled" id="pageSubmenu">
         <li>
-          <a href="#">Todas</a>
+          <a routerLinkActive="active"
+             #rlinciT="routerLinkActive"
+             [ngClass]="rlinciT.isActive ? '' : 'inactive'"
+             [routerLink]="['incidencias','todas']">Todas</a>
         </li>
         <li>
-          <a href="#">Por Controlar</a>
+          <a routerLinkActive="active"
+             #rlinciPC="routerLinkActive"
+             [ngClass]="rlinciPC.isActive ? '' : 'inactive'"
+             [routerLink]="['incidencias','porControlar']">Por Controlar</a>
         </li>
         <li>
-          <a href="#">Controladas</a>
+          <a routerLinkActive="active"
+             #rlinciC="routerLinkActive"
+             [ngClass]="rlinciC.isActive ? '' : 'inactive'"
+             [routerLink]="['incidencias','controladas']">
+            Controladas
+          </a>
         </li>
         <li>
           <a href="#">Por Reparar</a>
         </li>
         <li>
-          <a href="#">Reparadas</a>
+          <a routerLinkActive="active"
+             #rlinciR="routerLinkActive"
+             [ngClass]="rlinciR.isActive ? '' : 'inactive'"
+             [routerLink]="['incidencias','reparadas']">Reparadas</a>
         </li>
       </ul>
     </li>
@@ -95,12 +110,9 @@
     </li>
 
 
-
-
-
     <li routerLinkActive="active"
         #rlm="routerLinkActive"
-        [ngClass]="rlm.isActive ? '' : 'inactive'"
+        [ngClass]="rlm.isActive ? 'active' : 'inactive'"
         style="padding: 5px!important;">
       <a [routerLink]="['militares']" aria-expanded="false">
         <div class="container-fluid">
@@ -116,7 +128,19 @@
       </a>
     </li>
 
+    <li>
+      <div class="container">
+        <div class="row cursor" style="background-color: #00192b; position: fixed; bottom: 0; width:250px;"
+             (click)="logout()">
+          <div class="col-lg-12">
+            <a class="text-center">
+              <span><fa-icon icon="power-off" size="2x"></fa-icon></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </li>
+
 
   </ul>
-
 </nav>
